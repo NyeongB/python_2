@@ -1,0 +1,472 @@
+string = ["a", "ab", "abc"]
+
+for i in string :
+    print(hash(i))
+
+>>  -4600563812084320951
+    -9018392627289975125
+    6234468088255173602
+
+
+완전 고유한 값이 나옴 
+
+##############################
+
+a = {}
+
+result[a] = result.get(a, 0) + 1
+딕셔너리에 저장할때 있으면 a의 밸류가 나오고 없으면 0이 나옴
+
+a.keys()
+a.values()
+a.items()   # 전부 리스트로 반환됨
+
+a[2] = "2" # 2라는 키값에 "2"라는 밸류 넣음
+
+b = {'a':1,'b':2}
+b['c'] = 3
+b['d'] = 4  #직접 접근
+b.pop('c')  # 키값으로 pop
+print(b.get('c','default'))
+print(1 in b.values())
+
+for i, j in b.items():  # 키와 아이템 동시에 뽑을 수 있음
+    print(i,j)
+
+#################################################3
+
+s = set([1,2,3])
+s2 = set("hello")
+
+set에 인덱스로 접근하려면 리스트나 튜플로 변경한 후 에 접근 가능
+
+len() 함수로 집합에 들어있는 값(원소)의 개수를 확인
+
+add(값) - 집합에 새로운 값을 추가한다. (중복된 값은 무시)
+
+remove(값) - 전달받은 값을 삭제 (없을 때 에러 메시지를 출력)
+
+discard(값) - 전달받은 값을 삭제 (없을 때 그냥 무시)
+
+pop() - 임의의 값을 리턴하고 삭제
+
+clear() - 집한에 있는 모든 값을 삭제
+
+copy() - 집합을 복제하여 리턴
+
+있나 없나
+
+2 in s -> True or False
+
+###################################################3
+
+answer = 0
+
+def check():
+    global answer   #글로벌있어야지만 전역변수 컨트롤 가능
+    answer +=1
+
+check()
+print(answer)
+##############################################
+
+a = [1,2,3]
+b = a[:]    # 이렇게 안하면 주소값 복사라 참조변수만 다른 완전 동일한 메모리를 가르킴
+b = copy(a)
+
+##############################################
+리스트를 문자열로 
+a = ["ab","cd","ef"]
+
+s = ":".join(a) # 'ab:cd:ef'
+print(s)
+
+##############################################
+print('j' not in 'python')
+
+print(1 in [2,3,4,5]) # 있나 없나 체크 가능
+
+##############################################
+a = [1,2,3,4]
+
+result = [n * 3 for n in a if n % 2]
+print(result)
+
+print([x * y for x in range(2,10) 
+        for y in range(1,10)])      # 리스트 내포 사용하기
+
+#################################################3
+a =[1,2,3,4,5,6,7]
+
+for i in a :
+    print(a[i:])
+    print(a[i:][::-1]) # 거꾸로 출력 슬라이싱 하면서
+
+#####################
+# 진법 변환
+
+num = 13
+jin = 2
+answer = ""
+
+while num > 0:
+    r = num % jin
+    num = int(num / jin)
+    answer = str(r) + answer
+
+print(answer)
+
+######################
+bin(13)
+oct(13)
+hex(13)
+문자열로 반환됨
+
+다시 십진수로 변환
+
+print(int('101101',2))
+print(int('101101',8))
+print(int('AF',16))
+
+앞에 문자가 없이 변환하고 싶을때
+print(format(10,'b'))
+print(format(10,'o'))
+print(format(10,'X'))
+print(format(10,'d'))
+
+###################################
+하나 쓸떄는 그냥 for i in a: 가능한데 인덱스랑 값 쓸꺼면 
+
+a = [2,1,3,2]
+
+for i, v in enumerate(a):   # 앞에가 인덱스 뒤에가 밸류
+    print(i)
+    print(v)
+
+list_1 = [(v,i) for i, v in enumerate(a)]   # 이런 식으로 리스트만들수있음 
+
+print(list_1)
+//
+from collections import deque
+
+queue = deque([(v,i) for i, v in enumerate(a)]) # 이런식으로 인덱스와 값을가진 큐도 만들수있음
+
+print(queue)
+    
+########################################
+컴페레이터 커스텀
+import functools
+
+def 함수(a,b) :
+
+
+sorted(list_1,key=functools.cmp_to_key(함수))
+
+##############################################
+
+문자열에서 바로 반복문 
+문자열에서 바로 있는지 체크하는 if문 가능 
+s = "abcde"
+s1 = "cde"
+
+for i in s:
+    if i in s1 :
+        print(i+"는"+s1+"에 포함 O") 
+    else :
+        print(i+"는"+s1+"에 포함 X")
+
+#############################################
+
+변수는 글로벌인데
+자료구조는 그냥 써도 되는것같음 
+
+a = []
+
+def func_1():
+    a.append("첫번째 함수")
+    
+def func_2():
+    a.append("두번째 함수")
+
+print(a)
+func_1()
+func_2()
+print(a)
+
+############################################
+조합 내장 함수 이용 
+from itertools import combinations
+
+nums = [1,2,3,4,5]
+com = list(combinations(nums, 4))
+
+print(com)
+
+'''
+[(1, 2, 3, 4), (1, 2, 3, 5), (1, 2, 4, 5), (1, 3, 4, 5), (2, 3, 4, 5)]
+'''
+
+############################################
+아스키 코드 다루기 
+print(ord("a"))
+print(chr(97))
+
+############################################
+
+if 0 :
+    print("X")
+
+if 1 :
+    print("O")    
+
+##########################################3
+
+answer = []
+
+for i in range(5)
+    answer.append(str(i))
+
+print(" ".join(answer)) # 문자열로 된것들만 조인가능
+
+##############################################
+최소 힙
+import heapq
+
+a = [5,4,3,2,1,]
+
+heapq.heapify(a)`# 초기화
+heapq.heappush(a,0) # 푸쉬
+print(heapq.heappop(a)) # 팝
+print(a[0])  # 맨 위에값 보기만 하기
+print(a)
+
+##############################################
+최대 힙
+import heapq
+
+heap = []
+
+heapq.heappush(heap, (-temp, temp)) # push
+heapq.heappop(heap)[1]  # pop
+
+############################################
+파이썬 스왑 
+
+a,b = b,a   # 사기적임
+
+###########################################
+튜플의 두번째 원소를 기준으로 정렬하고 싶을때
+
+array = [('바나나',2), ('사과',5), ('당근',3)]
+
+print(array)
+
+def setting(data):
+    return data[1]
+
+result = sorted(array, key=setting)
+
+print(result)
+#################################################
+a = [('c',1),('a',4),('b',2),('d',3)]
+
+print(a)
+a = sorted(a, key=lambda x: x[1])   # 두번째 원소로 정렬
+print(a)
+
+a = sorted(a, key=lambda x: x[0], reverse=True) # 첫번째 원소로 정렬
+print(a)
+
+a.sort(key=lambda x : (x[1],x[0]))  # 두번째 => 첫번째 정렬
+
+############################################
+
+문자형, 정수형 데이터 따로따로 받기
+array = []
+for _ in range(n):
+    input_data = input().split()
+    array.append((input_data[0], int(input_data[1])))
+
+##############################################
+import sys  
+
+# 빠른입력 가능 
+input_data = sys.stdin.readline().rstrip()  # 마지막 rstrip()은 enter(개행) 없애려 관행적으로 사용
+
+print(input_data)
+
+1111 -> list(map(int,sys.stdin.readline().rstrip()))
+1 1 1 1 -> list(map(int, sys.stdin.readline().rstrip().split()))
+#############################################
+
+기본 받기 
+
+a = list(map(int,input()))  # 1111
+b = list(map(int,input().split()))  # 1 1 1 1
+
+print(a)
+print(b)
+
+###############################################
+이차원 배열 입력 받기
+n = 5
+c = [list(map(int,input().split())) for _ in range(n)]
+
+print(c)
+
+d = [list(map(int, input())) for _ in range(n)]
+
+print(d[1][2])
+
+
+#####################################################3
+소수 고대로 출력
+f = input()
+f = float(f)
+print(f)
+#######################################################
+n = 10
+print(-n)
+# -10 출력
+
+#####################################################33
+제곱근 
+import math
+n = math.sqrt(16)
+n = int(16**0.5)
+
+#####################################################
+올림, 내림, 반올림
+import math
+
+a = math.ceil(1.5)  #2
+b = math.floor(1.5) #1
+c = round(1.5)  #2
+
+print(a, b, c)
+
+###########################################################
+배열 인덱스 sum
+arr = [1,2,3,4,5,6]
+sum(arr[0:6])   # 시작인덱스부터, 끝인덱스 전까지
+
+##########################################################
+문자열 리스트로 바로 추출 
+s = 'gfedcbZ'
+arr = list(s)
+print(arr)  #['g', 'f', 'e', 'd', 'c', 'b', 'Z']
+
+arr.sort()  # 직접 바뀌는거
+sorted(arr) # 쏘는거
+
+#####################################################
+숫자 판별 
+s = '1234abcd'
+
+for i in s:
+    if i.isdigit():
+        print(i)
+    else :
+        print('문자')
+
+######################################################
+문자열 길이 판별 
+s = 'abcd'
+s1 = 'a'
+s2 = 'abc'
+s3 = 'abcdefg'
+
+arr = [s,s1,s2,s3]
+
+for i in arr:
+    if len(i) in (4,6):
+        print(i + '는 4~6 길이입니다.')
+    else :
+        print(i + '는 4보다 작고 6보다 큽니다.')
+
+###############################################
+리스트 기본
+a = [1,2,3,4,5,6]
+
+del a[0]    # index 삭제
+a.remove(4) # value로 접근 삭제
+print(a)
+
+a.insert(2,4)   # 해당 인덱스의 값 넣기 
+print(a.index(3))   # 위치 반환
+print(a)
+
+print(a.count(1))   # value 값들중 몇개있는지 체크        
+=======
+print(a.count(1))   # value 값들중 몇개있는지 체크      
+
+#################################################
+a.reverse() 와 a.sort(reverse=True) 차이점
+
+전자는 순서를 뒤집는거고 후자는 내림차순으로 정렬하는것
+=======
+##################################################
+from collections import deque
+
+arr = [1,1,1,1,1,9,1]
+
+q = deque((v,i) for i, v in enumerate(arr))
+#q = deque((i,v) for i, v in enumerate(arr))    #!!!!!!!!!!!!!!!!
+
+print(max(q))
+
+#좀 충격인게 v,i 로 뽑아야지 맥스 가능하고 i, v로 고대로 뽑으면 밸류 부분에서 max()가 안됌
+
+================================================================================
+# 3차원 배열
+n, m, h = (4,4,2)
+arr = [[list(map(int, input().split())) for _ in range(n)] for _ in range(h)]
+
+arr[h][n][m]    # z,x,y 순으로 접근 
+
+for k in range(h):
+    for i in range(n):
+        for j in range(m):
+            print(arr[k][i][j])
+
+===============================================================================
+# 2차원 배열 간편 출력
+arr = [[0] * 4 for _ in range(4)]
+
+for i in arr:
+    print(' '.join(map(str,i)),end='\n')
+
+============================================================================
+a {1:1,2:2}
+a.key() # dict_keys 객체를 돌려줌
+
+for i in a.keys(): 로 사용가능함
+
+리스트로 뽑고 싶으면 list(a.keys())
+
+===========================================================================
+for i in range(4, 0, -1):
+    print(i)
+4
+3
+2
+1
+4부터 0이 되기전까지 -1씩 반복
+==================================================
+arr = [1,2,3,4]
+if arr = [1,2,3,4]:
+    print("same")
+값이 같은거로 비교하나봄
+
+================================================
+# 소수점 버리기
+int(number)
+
+===============================================
+string.isalpha()
+string.upper()
+=============================================
+set 연산
+& 합집합
+| 교집합
+- 차집합    
