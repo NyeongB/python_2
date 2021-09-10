@@ -133,3 +133,13 @@ def add_and_mul(a, b):
     return a+b, a*b
 
 print(add_and_mul(3,4))
+
+======================================================
+# lambda 정렬기준 
+튜플 인덱스, 오름,내림 커스텀
+
+arr = [('SI', 55), ('CONTENTS', 53), ('HARDWARE', 19), ('PORTAL', 55), ('GAME', 22)]
+
+arr.sort(key=lambda x:[-x[1],x[0]]) # 두번째 인자를 기준으로 내림차순정렬, 첫번째 인자를 기준으로 오름차순 정렬
+
+print(arr)
