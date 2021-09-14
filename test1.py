@@ -1,5 +1,25 @@
-arr = [('SI', 55), ('CONTENTS', 53), ('HARDWARE', 19), ('PORTAL', 55), ('GAME', 22)]
+import functools 
 
-arr.sort(key=lambda x:[-x[1],x[0]])
+
+arr = ['fab', 'fed', 'f', 'ed','e']
+ab = {'f':10,'e':11,'d':12,'c':13,'b':14,'a':15}
+def comparator(a,b):
+    s_a = ''
+    s_b = ''
+    
+    for i in a:
+        s_a += str(ab[i])
+
+    for i in list(b):
+        s_b += str(ab[i])
+    print(s_a,s_b)
+    if s_a > s_b:
+        return 1
+    else:
+        return -1
+
+print(arr)
+
+arr.sort(key=functools.cmp_to_key(comparator))
 
 print(arr)
